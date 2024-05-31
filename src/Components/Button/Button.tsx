@@ -1,3 +1,4 @@
+import "./Button.scss";
 
 type ButtonProps = {
     heading: string;

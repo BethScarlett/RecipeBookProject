@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8dvh;
+    width: 100vw;
+    margin: auto;
+
+    &__heading {
+        position: absolute;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        width: inherit;
+        margin-right: 10%;
+    }
+}

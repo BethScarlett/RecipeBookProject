@@ -1,10 +1,9 @@
-import NavbarButtons from "./Components/NavbarButtons/NavbarButtons"
+import Navbar from "./Components/Navbar/Navbar"
 
 const App = () => {
   return (
     <div>
-      <h1>Recipe Book</h1>
-      <NavbarButtons buttonOneHeading="View" buttonTwoHeading="Create" buttonThreeHeading="Update"/>
+      <Navbar />
     </div>
   )
 }

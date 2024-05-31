@@ -1,4 +1,5 @@
 import Button from "../Button/Button";
+import "./NavbarButtons.scss"
 
 type NavbarButtonsProps = {
     buttonOneHeading: string;
@@ -8,7 +9,7 @@ type NavbarButtonsProps = {
 
 const NavbarButtons = ({buttonOneHeading, buttonTwoHeading, buttonThreeHeading} : NavbarButtonsProps) => {
   return (
-    <div>
+    <div className="navbar-buttons">
       <Button heading={buttonOneHeading}/>
       <Button heading={buttonTwoHeading}/>
       <Button heading={buttonThreeHeading}/>
