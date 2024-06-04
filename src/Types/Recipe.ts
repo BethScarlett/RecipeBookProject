@@ -1,3 +1,5 @@
+import suitableFor from "./SuitableFor";
+
 type Recipe = {
   id: number;
   img: string;
@@ -7,5 +9,7 @@ type Recipe = {
   ingredients: string[];
   steps: string[];
   category: string;
-  suitableFor: string[];
+  suitableFor: suitableFor[];
 };
+
+export default Recipe;

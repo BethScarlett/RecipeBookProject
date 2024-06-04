@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar/Navbar";
-import RecipeCard from "./Components/RecipeCard/RecipeCard";
+//import RecipeCard from "./Components/RecipeCard/RecipeCard";
+import Recipe from "./Types/Recipe";
+import RecipeCardContainer from "./Containers/RecipeCardContainer/RecipeCardContainer";
 
 const App = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>();
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
     getRecipes();
@@ -21,7 +23,7 @@ const App = () => {
       <Navbar heading="Recipe Book" />
       {/* Placeholder Navbar */}
       <Navbar />
-      <RecipeCard />
+      <RecipeCardContainer recipes={recipes} />
     </div>
   );
 };
