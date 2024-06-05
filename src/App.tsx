@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar/Navbar";
-//import RecipeCard from "./Components/RecipeCard/RecipeCard";
 import Recipe from "./Types/Recipe";
 import RecipeCardContainer from "./Containers/RecipeCardContainer/RecipeCardContainer";
 

@@ -1,3 +1,4 @@
+import "./RecipeCardContainer.scss";
 import RecipeCard from "../../Components/RecipeCard/RecipeCard";
 import Recipe from "../../Types/Recipe";
 
@@ -7,14 +8,10 @@ type RecipeCardContainerProps = {
 
 const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
   return (
-    <div>
+    <div className="card-container">
       {recipes.map((recipe) => (
         <div key={recipe.id}>
-          <RecipeCard
-            name={recipe.name}
-            desc={recipe.desc}
-            suitableFor={recipe.suitableFor}
-          />
+          <RecipeCard name={recipe.name} description={recipe.description} />
         </div>
       ))}
     </div>

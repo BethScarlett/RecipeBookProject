@@ -1,21 +1,17 @@
+import "./RecipeCard.scss";
 import placeholder from "../../assets/Celebration_Cake.png";
-import suitableFor from "../../Types/SuitableFor";
 
 type RecipeCardProps = {
   name: string;
-  desc: string;
-  suitableFor: suitableFor[];
+  description: string;
 };
 
-const RecipeCard = ({ name, desc, suitableFor }: RecipeCardProps) => {
+const RecipeCard = ({ name, description }: RecipeCardProps) => {
   return (
-    <div>
-      <img src={placeholder} alt={name} />
-      <h3>{name}</h3>
-      <p>{desc}</p>
-      {suitableFor.map((line) => (
-        <div key={Math.random()}>{line.suitableFor}</div>
-      ))}
+    <div className="card">
+      <img src={placeholder} alt={name} className="card__image" />
+      <h3 className="card__name">{name}</h3>
+      <p className="card__description">{description}</p>
     </div>
   );
 };

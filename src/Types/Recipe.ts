@@ -5,7 +5,7 @@ type Recipe = {
   img: string;
   name: string;
   madeBy: string;
-  desc: string;
+  description: string;
   ingredients: string[];
   steps: string[];
   category: string;
