@@ -1,8 +1,9 @@
 import "./RecipeCardExpanded.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Recipe from "../../Types/Recipe";
 import placeholder from "../../assets/Celebration_Cake.png";
 import { useEffect, useState } from "react";
+import Button from "../Button/Button";
 
 type RecipeCardExpandedProps = {
   recipes: Recipe[];
@@ -62,6 +63,9 @@ const RecipeCardExpanded = ({ recipes }: RecipeCardExpandedProps) => {
             Step {index + 1}: {step}
           </p>
         ))}
+      <Link to={"/"}>
+        <Button heading="Back home" />
+      </Link>
     </div>
   );
 };
