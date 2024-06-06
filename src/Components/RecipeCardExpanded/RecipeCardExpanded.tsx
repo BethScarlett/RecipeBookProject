@@ -2,6 +2,7 @@ import "./RecipeCardExpanded.scss";
 import { useParams } from "react-router-dom";
 import Recipe from "../../Types/Recipe";
 import placeholder from "../../assets/Celebration_Cake.png";
+import { useEffect, useState } from "react";
 
 type RecipeCardExpandedProps = {
   recipes: Recipe[];
@@ -9,12 +10,34 @@ type RecipeCardExpandedProps = {
 
 const RecipeCardExpanded = ({ recipes }: RecipeCardExpandedProps) => {
   const { id } = useParams();
+  const cleanId = Number(id);
+  const [ingredients, setIngredients] = useState<String[]>();
+  const [steps, setSteps] = useState<String[]>();
 
   const filteredRecipe = recipes.filter((recipe) => {
-    return recipe.id == Number(id);
+    return recipe.id == cleanId;
   });
 
-  console.log(`Filtered recipe is: ${filteredRecipe}`);
+  useEffect(() => {
+    handleGetIngredients(cleanId);
+    handleGetSteps(cleanId);
+  }, []);
+
+  const handleGetIngredients = async (cleanId: number) => {
+    const response = await fetch(
+      `http://localhost:8080/recipes/ingredients/${cleanId}`
+    );
+    const result = await response.json();
+    setIngredients(result);
+  };
+
+  const handleGetSteps = async (cleanId: number) => {
+    const response = await fetch(
+      `http://localhost:8080/recipes/steps/${cleanId}`
+    );
+    const result = await response.json();
+    setSteps(result);
+  };
 
   return (
     <div className="expanded-card">
@@ -24,9 +47,20 @@ const RecipeCardExpanded = ({ recipes }: RecipeCardExpandedProps) => {
         className="expanded-card__image"
       />
       <h3 className="expanded-card__name">{filteredRecipe[0].name}</h3>
+      <p>Description: </p>
       <p className="expanded-card__description">
         {filteredRecipe[0].description}
       </p>
+      <p>Ingredients: </p>
+      {ingredients &&
+        ingredients.map((ingredient, index) => <p key={index}>{ingredient}</p>)}
+      <p>Steps: </p>
+      {steps &&
+        steps.map((step, index) => (
+          <p key={index}>
+            Step {index + 1}: {step}
+          </p>
+        ))}
     </div>
   );
 };

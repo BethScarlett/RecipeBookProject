@@ -11,8 +11,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 225px;
-  width: 225px;
+  height: 80dvh;
+  width: 95dvw;
   background-color: lightcoral;
   border: 2px solid none;
   border-radius: 30px;
@@ -32,3 +32,11 @@
     font-size: 30px;
   }
 }
+
+//To do now
+//Add and commit
+//Add small margin between headings and content
+//Add space between sections
+
+//TODO Media Qurey stuff
+//Tighten shadow and dvw on lower screen width
