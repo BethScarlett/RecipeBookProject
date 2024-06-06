@@ -1,3 +1,5 @@
+@use "../../assets/Styling/variables" as *;
+
 * {
   margin: 0;
   padding: 0;
@@ -21,5 +23,11 @@
   &__image {
     height: 50%;
     width: 50%;
+  }
+
+  &__name {
+    font-family: $heading1;
+    font-weight: 600;
+    font-size: 30px;
   }
 }

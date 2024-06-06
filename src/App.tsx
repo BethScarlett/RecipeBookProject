@@ -21,7 +21,7 @@ const App = () => {
     <div>
       <Navbar heading="Recipe Book" />
       {/* Placeholder Navbar */}
-      <Navbar />
+      {/* <Navbar /> */}
       <RecipeCardContainer recipes={recipes} />
     </div>
   );
