@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import Recipe from "./Types/Recipe";
 import RecipeCardContainer from "./Containers/RecipeCardContainer/RecipeCardContainer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RecipeCardExpanded from "./Components/RecipeCardExpanded/RecipeCardExpanded";
 
 const App = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -19,10 +21,16 @@ const App = () => {
 
   return (
     <div>
-      <Navbar heading="Recipe Book" />
-      {/* Placeholder Navbar */}
-      {/* <Navbar /> */}
-      <RecipeCardContainer recipes={recipes} />
+      <BrowserRouter>
+        <Navbar heading="Recipe Book" />
+        <Routes>
+          <Route path="/" element={<RecipeCardContainer recipes={recipes} />} />
+          <Route
+            path="/recipe/:id"
+            element={<RecipeCardExpanded recipes={recipes} />}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
