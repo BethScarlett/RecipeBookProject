@@ -1,14 +1,19 @@
+import "./RecipeCard.scss";
 import placeholder from "../../assets/Celebration_Cake.png";
 
-const RecipeCard = () => {
-  return (
-    <div>
-      <img src={placeholder} alt="Cake" />
-      <h3>Cake</h3>
-      <p>It's a cake</p>
-      <p>Suitable for: Anyone who likes cake</p>
-    </div>
-  )
-}
+type RecipeCardProps = {
+  name: string;
+  description: string;
+};
 
-export default RecipeCard
+const RecipeCard = ({ name, description }: RecipeCardProps) => {
+  return (
+    <div className="card">
+      <img src={placeholder} alt={name} className="card__image" />
+      <h3 className="card__name">{name}</h3>
+      <p className="card__description">{description}</p>
+    </div>
+  );
+};
+
+export default RecipeCard;

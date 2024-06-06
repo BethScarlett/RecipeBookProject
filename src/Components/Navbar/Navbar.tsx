@@ -1,19 +1,20 @@
-import NavbarButtons from "../NavbarButtons/NavbarButtons"
+//import NavbarButtons from "../NavbarButtons/NavbarButtons"
 import "./Navbar.scss";
 
 type NavbarProps = {
-    heading?: string;
-}
+  heading?: string;
+};
 
-const Navbar = ({heading} : NavbarProps) => {
+const Navbar = ({ heading }: NavbarProps) => {
   return (
     <div className="navbar">
       <h1 className="navbar__heading">{heading}</h1>
       <div className="navbar__buttons">
-        <NavbarButtons buttonOneHeading="View" buttonTwoHeading="Create" buttonThreeHeading="Update"/>
+        {/* TODO - Add back later */}
+        {/* <NavbarButtons buttonOneHeading="View" buttonTwoHeading="Create" buttonThreeHeading="Update"/> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
