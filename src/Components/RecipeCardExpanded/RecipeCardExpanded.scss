@@ -11,7 +11,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 80dvh;
+  min-height: 85dvh;
+  height: fit-content;
   width: 95dvw;
   background-color: lightcoral;
   border: 2px solid none;
@@ -22,8 +23,8 @@
   text-align: center;
 
   &__image {
-    height: 50%;
-    width: 50%;
+    height: 150px;
+    width: 150px;
   }
 
   &__name {
@@ -31,12 +32,16 @@
     font-weight: 600;
     font-size: 30px;
   }
-}
 
-//To do now
-//Add and commit
-//Add small margin between headings and content
-//Add space between sections
+  &__heading {
+    font-weight: 600;
+    margin: 10px 0;
+  }
+
+  &__line {
+    margin: 3px 0;
+  }
+}
 
 //TODO Media Qurey stuff
 //Tighten shadow and dvw on lower screen width

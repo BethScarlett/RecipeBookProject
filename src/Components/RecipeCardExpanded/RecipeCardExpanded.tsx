@@ -47,17 +47,18 @@ const RecipeCardExpanded = ({ recipes }: RecipeCardExpandedProps) => {
         className="expanded-card__image"
       />
       <h3 className="expanded-card__name">{filteredRecipe[0].name}</h3>
-      <p>Description: </p>
-      <p className="expanded-card__description">
-        {filteredRecipe[0].description}
-      </p>
-      <p>Ingredients: </p>
+      <p>'{filteredRecipe[0].description}'</p>
+      <p className="expanded-card__heading">Ingredients: </p>
       {ingredients &&
-        ingredients.map((ingredient, index) => <p key={index}>{ingredient}</p>)}
-      <p>Steps: </p>
+        ingredients.map((ingredient, index) => (
+          <p key={index} className="expanded-card__line">
+            {ingredient}
+          </p>
+        ))}
+      <p className="expanded-card__heading">Steps: </p>
       {steps &&
         steps.map((step, index) => (
-          <p key={index}>
+          <p key={index} className="expanded-card__line">
             Step {index + 1}: {step}
           </p>
         ))}
