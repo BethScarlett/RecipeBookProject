@@ -1,0 +1,47 @@
+@use "../../assets/Styling/variables" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.expanded-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 85dvh;
+  height: fit-content;
+  width: 95dvw;
+  background-color: lightcoral;
+  border: 2px solid none;
+  border-radius: 30px;
+  box-shadow: 10px 10px 10px black;
+  margin: auto;
+  margin-bottom: 50px;
+  text-align: center;
+
+  &__image {
+    height: 150px;
+    width: 150px;
+  }
+
+  &__name {
+    font-family: $heading1;
+    font-weight: 600;
+    font-size: 30px;
+  }
+
+  &__heading {
+    font-weight: 600;
+    margin: 10px 0;
+  }
+
+  &__line {
+    margin: 3px 0;
+  }
+}
+
+//TODO Media Qurey stuff
+//Tighten shadow and dvw on lower screen width
