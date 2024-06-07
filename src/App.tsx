@@ -8,16 +8,16 @@ import RecipeCardExpanded from "./Components/RecipeCardExpanded/RecipeCardExpand
 const App = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  useEffect(() => {
-    getRecipes();
-  }, []);
-
   const getRecipes = async () => {
     const response = await fetch("http://localhost:8080/recipes");
     const result = await response.json();
     console.log(result);
     setRecipes(result);
   };
+
+  useEffect(() => {
+    getRecipes();
+  }, []);
 
   return (
     <div>
@@ -29,6 +29,7 @@ const App = () => {
             path="/recipe/:id"
             element={<RecipeCardExpanded recipes={recipes} />}
           />
+          y
         </Routes>
       </BrowserRouter>
     </div>

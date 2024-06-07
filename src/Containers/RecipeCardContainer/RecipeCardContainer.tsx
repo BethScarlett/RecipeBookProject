@@ -3,16 +3,21 @@ import RecipeCard from "../../Components/RecipeCard/RecipeCard";
 import Recipe from "../../Types/Recipe";
 import { Link } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
+import RecipeContainerButtons from "../../Components/RecipeContainerButtons/RecipeContainerButtons";
 
 type RecipeCardContainerProps = {
   recipes: Recipe[];
 };
 
 const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
+  console.log("Recipes passed in: " + recipes);
+
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setFilteredRecipes(recipes);
+  }, [recipes]);
 
   useEffect(() => {
     handleFilterRecipes(searchTerm);
@@ -40,6 +45,8 @@ const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
     setSearchTerm(cleanInput);
   };
 
+  console.log(filteredRecipes);
+
   return (
     <div className="card-container">
       <label htmlFor="search">Search By Name/Category: </label>
@@ -49,6 +56,7 @@ const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
         id="search"
         onChange={handleInputChange}
       />
+      <RecipeContainerButtons recipes={recipes} />
       {filteredRecipes.map((recipe) => (
         <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
           <RecipeCard name={recipe.name} description={recipe.description} />
