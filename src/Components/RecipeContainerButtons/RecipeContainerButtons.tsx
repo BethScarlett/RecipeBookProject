@@ -1,13 +1,19 @@
 import "./RecipeContainerButtons.scss";
 import Button from "../Button/Button";
 import Recipe from "../../Types/Recipe";
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEventHandler } from "react";
 
 type RecipeContainerButtonsProps = {
   recipes: Recipe[];
+  handleFilterByCategory: MouseEventHandler<HTMLButtonElement>;
+  selectedCategory?: string;
 };
 
-const RecipeContainerButtons = ({ recipes }: RecipeContainerButtonsProps) => {
+const RecipeContainerButtons = ({
+  recipes,
+  handleFilterByCategory,
+  selectedCategory,
+}: RecipeContainerButtonsProps) => {
   const [distinctCategories, setDistinctCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -26,9 +32,19 @@ const RecipeContainerButtons = ({ recipes }: RecipeContainerButtonsProps) => {
 
   return (
     <div className="buttons">
-      <Button heading="All" />
+      <Button
+        key={Math.random()}
+        heading="All"
+        handleFilterByCategory={handleFilterByCategory}
+        selectedCategory={selectedCategory}
+      />
       {distinctCategories.map((category) => (
-        <Button heading={category} key={Math.random()} />
+        <Button
+          key={Math.random()}
+          heading={category}
+          handleFilterByCategory={handleFilterByCategory}
+          selectedCategory={selectedCategory}
+        />
       ))}
     </div>
   );

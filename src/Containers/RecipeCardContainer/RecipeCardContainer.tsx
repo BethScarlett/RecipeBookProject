@@ -2,7 +2,7 @@ import "./RecipeCardContainer.scss";
 import RecipeCard from "../../Components/RecipeCard/RecipeCard";
 import Recipe from "../../Types/Recipe";
 import { Link } from "react-router-dom";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, FormEvent } from "react";
 import RecipeContainerButtons from "../../Components/RecipeContainerButtons/RecipeContainerButtons";
 
 type RecipeCardContainerProps = {
@@ -10,10 +10,9 @@ type RecipeCardContainerProps = {
 };
 
 const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
-  console.log("Recipes passed in: " + recipes);
-
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   useEffect(() => {
     setFilteredRecipes(recipes);
@@ -23,7 +22,7 @@ const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
     handleFilterRecipes(searchTerm);
   }, [searchTerm]);
 
-  //TODO - Remove category filter when buttons are complete
+  //TODO - Remove category filter when buttons are complete?
   const handleFilterRecipes = (searchTerm: string) => {
     setFilteredRecipes(
       recipes.filter((recipe) => {
@@ -37,15 +36,22 @@ const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
     );
   };
 
+  const handleFilterByCategory = (event: FormEvent<HTMLButtonElement>) => {
+    let searchTerm = event.currentTarget.id;
+    console.log(searchTerm);
+    setSelectedCategory(searchTerm);
+    if (searchTerm == "All") {
+      searchTerm = "";
+    }
+    handleFilterRecipes(searchTerm);
+  };
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const cleanInput =
       e.currentTarget.value.slice(0, 1).toUpperCase() +
       e.currentTarget.value.slice(1);
-    console.log(cleanInput);
     setSearchTerm(cleanInput);
   };
-
-  console.log(filteredRecipes);
 
   return (
     <div className="card-container">
@@ -56,7 +62,11 @@ const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
         id="search"
         onChange={handleInputChange}
       />
-      <RecipeContainerButtons recipes={recipes} />
+      <RecipeContainerButtons
+        recipes={recipes}
+        handleFilterByCategory={handleFilterByCategory}
+        selectedCategory={selectedCategory}
+      />
       {filteredRecipes.map((recipe) => (
         <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
           <RecipeCard name={recipe.name} description={recipe.description} />
