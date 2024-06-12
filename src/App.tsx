@@ -4,13 +4,10 @@ import Recipe from "./Types/Recipe";
 import RecipeCardContainer from "./Containers/RecipeCardContainer/RecipeCardContainer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RecipeCardExpanded from "./Components/RecipeCardExpanded/RecipeCardExpanded";
+import CreateRecipePage from "./Pages/CreateRecipe/CreateRecipePage";
 
 const App = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-
-  useEffect(() => {
-    getRecipes();
-  }, []);
 
   const getRecipes = async () => {
     const response = await fetch("http://localhost:8080/recipes");
@@ -18,6 +15,10 @@ const App = () => {
     console.log(result);
     setRecipes(result);
   };
+
+  useEffect(() => {
+    getRecipes();
+  }, []);
 
   return (
     <div>
@@ -29,6 +30,7 @@ const App = () => {
             path="/recipe/:id"
             element={<RecipeCardExpanded recipes={recipes} />}
           />
+          <Route path="/create/recipe" element={<CreateRecipePage />} />
         </Routes>
       </BrowserRouter>
     </div>
