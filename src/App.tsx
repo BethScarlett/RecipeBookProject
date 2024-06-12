@@ -4,6 +4,7 @@ import Recipe from "./Types/Recipe";
 import RecipeCardContainer from "./Containers/RecipeCardContainer/RecipeCardContainer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RecipeCardExpanded from "./Components/RecipeCardExpanded/RecipeCardExpanded";
+import CreateRecipePage from "./Pages/CreateRecipe/CreateRecipePage";
 
 const App = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -29,7 +30,7 @@ const App = () => {
             path="/recipe/:id"
             element={<RecipeCardExpanded recipes={recipes} />}
           />
-          y
+          <Route path="/create/recipe" element={<CreateRecipePage />} />
         </Routes>
       </BrowserRouter>
     </div>
