@@ -8,7 +8,7 @@ const CreateRecipePage = () => {
     img: "",
     name: "",
     description: "",
-    category: "",
+    category: "Other",
   };
 
   const [recipe, setRecipe] = useState<Recipe>(defaultRecipeState);
@@ -27,14 +27,29 @@ const CreateRecipePage = () => {
   const handleDropdownInput = (event: string | undefined, key: string) => {
     if (event != undefined) {
       setRecipe({ ...recipe, [key]: event });
-    } else {
-      setRecipe({ ...recipe, [key]: "Other" });
     }
     console.log(recipe);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    console.log(recipe);
+  const handleSubmit = () => {
+    createRecipe(recipe);
+  };
+
+  const createRecipe = async (newRecipe: Recipe) => {
+    try {
+      const response = await fetch("http://localhost:8080/recipe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newRecipe),
+      });
+
+      const result = await response.json();
+      console.log("Success", result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
