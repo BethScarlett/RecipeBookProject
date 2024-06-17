@@ -1,8 +1,10 @@
 import { FormEvent, useState } from "react";
 import Select from "react-select";
 import Recipe from "../../Types/Recipe";
+import Steps from "../../Types/Steps";
 
 const CreateRecipePage = () => {
+  //TODO - Move all this into a form component
   const defaultRecipeState = {
     id: -1,
     img: "",
@@ -11,7 +13,19 @@ const CreateRecipePage = () => {
     category: "Other",
   };
 
+  // const defaultStepsState = [
+  //   {
+  //   id: -1,
+  //   step: "",
+  //   step_number: 1,
+  //   recipe_id: 100,
+  //   }
+  // ];
+
   const [recipe, setRecipe] = useState<Recipe>(defaultRecipeState);
+  const [steps, setSteps] = useState<Steps[]>([
+    { id: -1, step: "", step_number: -1, recipe_id: -1 },
+  ]);
 
   const options = [
     { value: "Meat", label: "Meat" },
@@ -19,9 +33,27 @@ const CreateRecipePage = () => {
     { value: "Sweet Treats", label: "Sweet Treats" },
   ];
 
-  const handleInput = (event: FormEvent<HTMLInputElement>, key: string) => {
-    setRecipe({ ...recipe, [key]: event.currentTarget.value });
-    console.log(recipe);
+  const handleInput = (
+    event: FormEvent<HTMLInputElement>,
+    key: string,
+    i?: number
+  ) => {
+    if (key != "step") {
+      setRecipe({ ...recipe, [key]: event.currentTarget.value });
+      console.log(recipe);
+    } else {
+      if (i == undefined) {
+        return;
+      }
+      let newSteps = [...steps];
+      let newStep = { ...newSteps[i] };
+      newStep.step = event.currentTarget.value;
+      newStep.step_number = i + 1;
+      newSteps[i] = newStep;
+      console.log(newSteps);
+
+      setSteps(newSteps);
+    }
   };
 
   const handleDropdownInput = (event: string | undefined, key: string) => {
@@ -31,8 +63,19 @@ const CreateRecipePage = () => {
     console.log(recipe);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     createRecipe(recipe);
+  };
+
+  const handleAddStep = () => {
+    setSteps([...steps, { id: -1, step: "", step_number: -1, recipe_id: -1 }]);
+  };
+
+  const handleRemoveStep = (i: number) => {
+    const deleteStep = [...steps];
+    deleteStep.splice(i, 1);
+    setSteps(deleteStep);
   };
 
   const createRecipe = async (newRecipe: Recipe) => {
@@ -47,9 +90,47 @@ const CreateRecipePage = () => {
 
       const result = await response.json();
       console.log("Success", result);
+      handleGetRecipeID();
     } catch (error) {
       console.error("Error:", error);
     }
+  };
+
+  const createSteps = async (steps: Steps[], recipeId: number) => {
+    const finalSteps = [...steps];
+    finalSteps.forEach((step) => (step.recipe_id = recipeId));
+
+    // console.log(
+    //   "Array being sent has form of: id = " +
+    //     finalSteps[2].id +
+    //     "/ recipe id = " +
+    //     finalSteps[2].recipe_id +
+    //     "/ step = " +
+    //     finalSteps[2].step +
+    //     "/ step number = " +
+    //     finalSteps[2].step_number
+    // );
+
+    try {
+      const response = await fetch("http://localhost:8080/steps", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(steps),
+      });
+
+      const result = await response.json();
+      console.log("Success", result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleGetRecipeID = async () => {
+    const response = await fetch("http://localhost:8080/recipe/last_id");
+    const result = await response.json();
+    createSteps(steps, result);
   };
 
   return (
@@ -72,6 +153,7 @@ const CreateRecipePage = () => {
         <Select
           options={options}
           onChange={(event) => handleDropdownInput(event?.value, "category")}
+          name="category"
         ></Select>
         <label htmlFor="img">Image: </label>
         <input
@@ -79,6 +161,21 @@ const CreateRecipePage = () => {
           name="img"
           onInput={(event) => handleInput(event, "img")}
         />
+        <button type="button" onClick={handleAddStep}>
+          Add steps:{" "}
+        </button>
+        {steps.map((step, i) => (
+          <>
+            <input
+              name="step"
+              placeholder={step.step}
+              onChange={(event) => handleInput(event, "step", i)}
+            />
+            <button type="button" onClick={() => handleRemoveStep(i)}>
+              Delete
+            </button>
+          </>
+        ))}
         <button type="submit">Click to add</button>
       </form>
     </div>
