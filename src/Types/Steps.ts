@@ -1,7 +1,7 @@
 type Steps = {
   id: number;
   step: string;
-  step_number: number;
+  stepNumber: number;
   recipe_id: number;
 };
 
