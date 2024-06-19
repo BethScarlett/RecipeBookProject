@@ -1,3 +1,5 @@
+import "./CreateRecipePage.scss";
+
 import { FormEvent, useState } from "react";
 import Select from "react-select";
 import Recipe from "../../Types/Recipe";
@@ -152,63 +154,99 @@ const CreateRecipePage = () => {
   };
 
   return (
-    <div>
-      <h2></h2>
+    <div className="create-recipe">
+      <div className="create-recipe__heading">
+        <span className="create-recipe__hole"></span>
+        <span className="create-recipe__hole"></span>
+        <span className="create-recipe__hole"></span>
+      </div>
+
+      <h2>Create a recipe</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Recipe name: </label>
-        <input
-          type="text"
-          name="name"
-          onInput={(event) => handleInput(event, "name")}
-        />
-        <label htmlFor="description">Description: </label>
-        <input
-          type="text"
-          name="description"
-          onInput={(event) => handleInput(event, "description")}
-        />
-        <label htmlFor="category">Category: </label>
-        <Select
-          options={options}
-          onChange={(event) => handleDropdownInput(event?.value, "category")}
-          name="category"
-        ></Select>
-        <label htmlFor="img">Image: </label>
-        <input
-          type="text"
-          name="img"
-          onInput={(event) => handleInput(event, "img")}
-        />
-        <button type="button" onClick={handleAddStep}>
-          Add steps:{" "}
-        </button>
-        {steps.map((step, i) => (
-          <>
-            <input
-              name="step"
-              placeholder={step.step}
-              onChange={(event) => handleInput(event, "step", i)}
-            />
-            <button type="button" onClick={() => handleRemoveStep(i)}>
-              Delete
-            </button>
-          </>
-        ))}
-        <button type="button" onClick={handleAddIngredient}>
-          Add ingredients:{" "}
-        </button>
-        {ingredients.map((ingredient, i) => (
-          <>
-            <input
-              name="step"
-              placeholder={ingredient.name}
-              onChange={(event) => handleInput(event, "ingredient", i)}
-            />
-            <button type="button" onClick={() => handleRemoveIngredient(i)}>
-              Delete
-            </button>
-          </>
-        ))}
+        <div className="create-recipe__section">
+          <label htmlFor="name">Recipe name: </label>
+          <input
+            type="text"
+            name="name"
+            onInput={(event) => handleInput(event, "name")}
+            className="create-recipe__input"
+          />
+        </div>
+        <div className="create-recipe__section">
+          <label htmlFor="description">Description: </label>
+          <input
+            type="text"
+            name="description"
+            onInput={(event) => handleInput(event, "description")}
+            className="create-recipe__input"
+          />
+        </div>
+        <div className="create-recipe__section">
+          <label className="create-recipe__label" htmlFor="category">
+            Category:{" "}
+          </label>
+          <Select
+            options={options}
+            onChange={(event) => handleDropdownInput(event?.value, "category")}
+            name="category"
+          ></Select>
+        </div>
+        <div className="create-recipe__section">
+          <label htmlFor="img">Image: </label>
+          <input
+            type="text"
+            name="img"
+            onInput={(event) => handleInput(event, "img")}
+            className="create-recipe__input"
+          />
+        </div>
+        <div className="create-recipe__section">
+          <button
+            className="create-recipe__button"
+            type="button"
+            onClick={handleAddStep}
+          >
+            Add steps:{" "}
+          </button>
+          {/* TODO - Add keys to the maps */}
+          {steps.map((step, i) => (
+            <>
+              <label className="create-recipe__label" htmlFor="step">
+                {i + 1}
+              </label>
+              <input
+                name="step"
+                placeholder={step.step}
+                onChange={(event) => handleInput(event, "step", i)}
+                className="create-recipe__input"
+              />
+              <button type="button" onClick={() => handleRemoveStep(i)}>
+                Delete
+              </button>
+            </>
+          ))}
+        </div>
+        <div className="create-recipe__section">
+          <button type="button" onClick={handleAddIngredient}>
+            Add ingredients:{" "}
+          </button>
+          {ingredients.map((ingredient, i) => (
+            <div className="create-recipe__ingredient">
+              <label className="create-recipe__label" htmlFor="ingredient">
+                {i + 1}
+              </label>
+              <input
+                name="ingredient"
+                placeholder={ingredient.name}
+                onChange={(event) => handleInput(event, "ingredient", i)}
+                className="create-recipe__input"
+              />
+              <button type="button" onClick={() => handleRemoveIngredient(i)}>
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
         <button type="submit">Click to add</button>
       </form>
     </div>
