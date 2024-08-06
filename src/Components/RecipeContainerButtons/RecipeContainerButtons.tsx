@@ -37,6 +37,7 @@ const RecipeContainerButtons = ({
         heading="All"
         handleFilterByCategory={handleFilterByCategory}
         selectedCategory={selectedCategory}
+        buttonType="category"
       />
       {distinctCategories.map((category) => (
         <Button
@@ -44,6 +45,7 @@ const RecipeContainerButtons = ({
           heading={category}
           handleFilterByCategory={handleFilterByCategory}
           selectedCategory={selectedCategory}
+          buttonType="category"
         />
       ))}
     </div>

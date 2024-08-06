@@ -30,7 +30,7 @@ const App = () => {
             path="/recipe/:id"
             element={<RecipeCardExpanded recipes={recipes} />}
           />
-          <Route path="/create/recipe" element={<CreateRecipePage />} />
+          <Route path="/create" element={<CreateRecipePage />} />
         </Routes>
       </BrowserRouter>
     </div>

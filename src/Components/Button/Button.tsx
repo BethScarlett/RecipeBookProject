@@ -5,12 +5,14 @@ type ButtonProps = {
   heading: string;
   handleFilterByCategory?: MouseEventHandler<HTMLButtonElement>;
   selectedCategory?: string;
+  buttonType: "menu" | "category";
 };
 
 const Button = ({
   heading,
   handleFilterByCategory,
   selectedCategory,
+  buttonType,
 }: ButtonProps) => {
   const [variant, setVariant] = useState<string>("off");
 
@@ -29,7 +31,7 @@ const Button = ({
     <button
       onClick={handleFilterByCategory}
       id={heading}
-      className={`mybutton mybutton--${variant}`}
+      className={`${buttonType} ${buttonType}--${variant}`}
     >
       {heading}
     </button>
