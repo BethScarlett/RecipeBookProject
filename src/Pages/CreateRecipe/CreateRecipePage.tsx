@@ -85,15 +85,19 @@ const CreateRecipePage = () => {
   };
 
   const handleRemoveStep = (i: number) => {
-    const deleteStep = [...steps];
-    deleteStep.splice(i, 1);
-    setSteps(deleteStep);
+    if (steps.length > 1) {
+      const deleteStep = [...steps];
+      deleteStep.splice(i, 1);
+      setSteps(deleteStep);
+    }
   };
 
   const handleRemoveIngredient = (i: number) => {
-    const deleteIngredient = [...ingredients];
-    deleteIngredient.splice(i, 1);
-    setIngredients(deleteIngredient);
+    if (ingredients.length > 1) {
+      const deleteIngredient = [...ingredients];
+      deleteIngredient.splice(i, 1);
+      setIngredients(deleteIngredient);
+    }
   };
 
   const createRecipe = async (newRecipe: Recipe) => {
@@ -115,8 +119,6 @@ const CreateRecipePage = () => {
   };
 
   const createSteps = async (steps: Steps[]) => {
-    //console.log("JSON of steps = " + JSON.stringify(steps));
-
     try {
       const response = await fetch("http://localhost:8080/steps", {
         method: "POST",
@@ -135,8 +137,6 @@ const CreateRecipePage = () => {
   };
 
   const createIngredients = async (ingredients: Ingredients[]) => {
-    //console.log("JSON of steps = " + JSON.stringify(steps));
-
     try {
       const response = await fetch("http://localhost:8080/ingredients", {
         method: "POST",
@@ -148,6 +148,7 @@ const CreateRecipePage = () => {
 
       const result = await response.json();
       console.log("Success", result);
+      alert("Recipe created successfully");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -162,7 +163,7 @@ const CreateRecipePage = () => {
       </div>
 
       <h2>Create a recipe</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="create-recipe__form">
         <div className="create-recipe__section">
           <label htmlFor="name">Recipe name: </label>
           <input
