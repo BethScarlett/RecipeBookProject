@@ -25,13 +25,13 @@ const Navbar = ({ heading }: NavbarProps) => {
 
       <div className={`navbar__buttons navbar__buttons--${showMenu}`}>
         <Link to={"/"}>
-          <Button heading="View" />
+          <Button heading="View" buttonType="menu" />
         </Link>
 
         <Link to={"/create"}>
-          <Button heading="Create" />
+          <Button heading="Create" buttonType="menu" />
         </Link>
-        <Button heading="Update" />
+        <Button heading="Update" buttonType="menu" />
       </div>
     </div>
   );

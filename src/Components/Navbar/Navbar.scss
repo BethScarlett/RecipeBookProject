@@ -15,14 +15,12 @@
   }
 
   &__buttons {
+    width: 70dvw;
     &--true {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      scale: 0.75;
-      margin: auto;
-      margin-top: 10px;
-      //   margin-bottom: -15px;
+      justify-content: space-evenly;
+      margin: 10px 0;
     }
     &--false {
       display: none;
