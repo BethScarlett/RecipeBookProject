@@ -1,7 +1,8 @@
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import NavbarButtons from "../NavbarButtons/NavbarButtons";
+import Button from "../Button/Button";
 import "./Navbar.scss";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 type NavbarProps = {
   heading?: string;
@@ -17,17 +18,20 @@ const Navbar = ({ heading }: NavbarProps) => {
   return (
     <div className="navbar">
       <h1 className="navbar__heading">{heading}</h1>
-      <div className="navbar__buttons">
-        <div onClick={handleToggleMenu}>
-          <BurgerMenu />
-        </div>
-        {showMenu ? (
-          <NavbarButtons
-            buttonOneHeading="View"
-            buttonTwoHeading="Create"
-            buttonThreeHeading="Update"
-          />
-        ) : null}
+
+      <div onClick={handleToggleMenu} className="navbar__burger">
+        <BurgerMenu />
+      </div>
+
+      <div className={`navbar__buttons navbar__buttons--${showMenu}`}>
+        <Link to={"/"}>
+          <Button heading="View" />
+        </Link>
+
+        <Link to={"/create"}>
+          <Button heading="Create" />
+        </Link>
+        <Button heading="Update" />
       </div>
     </div>
   );
