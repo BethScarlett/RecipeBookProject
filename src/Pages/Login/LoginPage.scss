@@ -6,7 +6,7 @@
 
 .loginpage {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100dvh;
+  flex-direction: column;
+  margin-top: 25dvh;
+  height: 350px;
 }

@@ -7,8 +7,10 @@
 .loginform {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  border: solid 2px black;
+  background-color: red;
+  box-shadow: 1px 1px #fff1cf, 2px 2px #d8be7d, 3px 3px #9b1b1b;
   border-radius: 5px;
   width: 80vw;
   max-width: 450px;

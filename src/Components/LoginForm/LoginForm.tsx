@@ -176,6 +176,7 @@ const LoginForm = ({
       )}
       {formType == "login" && (
         <form className="loginform" onSubmit={handleSubmit}>
+          <h2>My Recipe Book</h2>
           <div className="loginform__input">
             <label
               htmlFor="email"
