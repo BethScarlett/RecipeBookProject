@@ -5,6 +5,7 @@ import RecipeCardContainer from "./Containers/RecipeCardContainer/RecipeCardCont
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RecipeCardExpanded from "./Components/RecipeCardExpanded/RecipeCardExpanded";
 import CreateRecipePage from "./Pages/CreateRecipe/CreateRecipePage";
+import LoginPage from "./Pages/Login/LoginPage";
 
 const App = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -25,6 +26,7 @@ const App = () => {
       <BrowserRouter>
         <Navbar heading="Recipe Book" />
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<RecipeCardContainer recipes={recipes} />} />
           <Route
             path="/recipe/:id"
