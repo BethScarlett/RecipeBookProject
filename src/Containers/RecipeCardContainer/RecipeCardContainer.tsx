@@ -4,6 +4,7 @@ import Recipe from "../../Types/Recipe";
 import { Link } from "react-router-dom";
 import { ChangeEvent, useEffect, useState, FormEvent } from "react";
 import RecipeContainerButtons from "../../Components/RecipeContainerButtons/RecipeContainerButtons";
+import Navbar from "../../Components/Navbar/Navbar";
 
 type RecipeCardContainerProps = {
   recipes: Recipe[];
@@ -54,25 +55,28 @@ const RecipeCardContainer = ({ recipes }: RecipeCardContainerProps) => {
   };
 
   return (
-    <div className="card-container">
-      <label htmlFor="search">Search By Name/Category: </label>
-      <input
-        type="text"
-        className="card-container__search"
-        id="search"
-        onChange={handleInputChange}
-      />
-      <RecipeContainerButtons
-        recipes={recipes}
-        handleFilterByCategory={handleFilterByCategory}
-        selectedCategory={selectedCategory}
-      />
-      {filteredRecipes.map((recipe) => (
-        <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
-          <RecipeCard name={recipe.name} description={recipe.description} />
-        </Link>
-      ))}
-    </div>
+    <>
+      <Navbar heading="Recipe Book" drawMenu={true} />
+      <div className="card-container">
+        <label htmlFor="search">Search By Name/Category: </label>
+        <input
+          type="text"
+          className="card-container__search"
+          id="search"
+          onChange={handleInputChange}
+        />
+        <RecipeContainerButtons
+          recipes={recipes}
+          handleFilterByCategory={handleFilterByCategory}
+          selectedCategory={selectedCategory}
+        />
+        {filteredRecipes.map((recipe) => (
+          <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
+            <RecipeCard name={recipe.name} description={recipe.description} />
+          </Link>
+        ))}
+      </div>
+    </>
   );
 };
 

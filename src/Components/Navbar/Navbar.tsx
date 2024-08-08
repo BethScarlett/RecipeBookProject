@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 
 type NavbarProps = {
   heading?: string;
+  drawMenu: boolean;
 };
 
-const Navbar = ({ heading }: NavbarProps) => {
+const Navbar = ({ heading, drawMenu }: NavbarProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   const handleToggleMenu = () => {
@@ -18,10 +19,11 @@ const Navbar = ({ heading }: NavbarProps) => {
   return (
     <div className="navbar">
       <h1 className="navbar__heading">{heading}</h1>
-
-      <div onClick={handleToggleMenu} className="navbar__burger">
-        <BurgerMenu />
-      </div>
+      {drawMenu == true && (
+        <div onClick={handleToggleMenu} className="navbar__burger">
+          <BurgerMenu />
+        </div>
+      )}
 
       <div className={`navbar__buttons navbar__buttons--${showMenu}`}>
         <Link to={"/"}>
